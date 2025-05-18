@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Dashboard - AGASOBANUYE BY CN</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #111; color: white; padding: 20px; }
+  h2 { color: gold; }
+  label, input { display: block; margin: 10px 0; width: 300px; }
+  input[type="text"], input[type="url"] { padding: 8px; border-radius: 5px; border: none; }
+  button { background: gold; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+  button:hover { background: #e6be00; }
+  #logout { background: red; margin-top: 20px; }
+</style>
+</head>
+<body>
+<h2>Admin Dashboard</h2>
+<form id="movieForm">
+  <label>Movie Title</label>
+  <input type="text" id="title" required />
+  <label>Cover Image URL</label>
+  <input type="url" id="coverURL" required />
+  <label>Watch URL</label>
+  <input type="url" id="watchURL" required />
+  <label>Download URL</label>
+  <input type="url" id="downloadURL" required />
+  <button type="submit">Add Movie</button>
+</form>
+
+<button id="logout">Logout</button>
+
+<script>
+  // Ensure only logged-in users can access
+  if(localStorage.getItem('loggedIn') !== 'true') {
+    window.location.href = 'login.html';
+  }
+
+  const SHEET_ID = 'YOUR_SHEET_ID_HERE';
+  const SHEET_GID = '0';
+
+  const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
+
+  document.getElementById('movieForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Here you would add code to post to your backend or Google Sheets API
+    // Since Google Sheets API requires OAuth, here just alert user
+    alert('To add movies programmatically, you need a backend or use Google Sheets API with OAuth.');
+  });
+
+  document.getElementById('logout').addEventListener('click', () => {
+    localStorage.removeItem('loggedIn');
+    window.location.href = 'login.html';
+  });
+</script>
+</body>
+</html>
